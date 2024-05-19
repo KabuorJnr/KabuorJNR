@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Company</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+       .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+       .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+       .header h1 {
+            margin: 0;
+        }
+       .nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+       .nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+       .nav li {
+            margin-right: 20px;
+        }
+       .nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+       .nav a:hover {
+            color: #ccc;
+        }
+       .properties {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+       .property {
+            margin: 20px;
+            width: 250px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+       .property:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+       .property img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+       .property h2 {
+            margin-top: 0;
+        }
+       .property p {
+            margin-bottom: 20px;
+        }
+       .property.price {
+            font-weight: bold;
+            color: #337ab7;
+        }
+       .property.location {
+            font-size: 14px;
+            color: #666;
+        }
+       .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            clear: both;
+        }
+       .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+       .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+       .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+       .close:hover,
+       .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+       .cart {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .cart:hover {
+            background-color: #444;
+        }
+        .cart span {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Real Estate Company</h1>
+        </header>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="properties">
+            <!-- Properties will be generated dynamically -->
+        </div>
+        <footer class="footer">
+            &copy; 2023 Real Estate Company
+        </footer>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <!-- Modal content will be generated dynamically -->
+        </div>
+    </div>
+    <div class="cart">
+        <span id="cart-count">0</span>
+    </div>
+    <script>
+        const propertiesData = [
+            {
+                id: 1,
+                title: 'Property 1',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.',
+                price: '$500,000',
+                location: '123 Main St, Anytown, USA',
+                image: 'https://via.placeholder.com/250x150'
+            },
+            {
+                id: 2,
+                title: 'Property 2',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor,vestibulum magna sed, convallis ex.',
+                price: '$750,000',
+                location: '456 Elm St, Othertown, USA',
+                image: 'https://via.placeholder.com/250x150'
+            },
+            {
+                id: 3,
+                title: 'Property 3',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.',
+                price: '$1,000,000',
+                location: '789 Oak St, Smalltown, USA',
+                image: 'https://via.placeholder.com/250x150'
+            },
+            // Add more properties here
+        ];
+
+        const propertiesPerPage = 3;
+        let currentPage = 1;
+
+        const propertiesContainer = document.querySelector('.properties');
+        const modal = document.querySelector('.modal');
+        const modalContent = document.querySelector('.modal-content');
+        const close = document.querySelector('.close');
+        const cart = document.querySelector('.cart');
+        const cartCount = document.querySelector('#cart-count');
+
+        function generateProperties(data, page) {
+            const start = (page - 1) * propertiesPerPage;
+            const end = start + propertiesPerPage;
+            const properties = data.slice(start, end);
+
+            let html = '';
+            properties.forEach(property => {
+                html += `
+                    <div class="property" data-id="${property.id}">
+                        <img src="${property.image}" alt="${property.title}">
+                        <h2>${property.title}</h2>
+                        <p>${property.description}</p>
+                        <p class="price">${property.price}</p>
+                        <p class="location">${property.location}</p>
+                    </div>
+                `;
+            });
+
+            propertiesContainer.innerHTML = html;
+        }
+
+        function generateModal(property) {
+            modalContent.innerHTML = `
+                <h2>${property.title}</h2>
+                <p>${property.description}</p>
+                <p class="price">${property.price}</p>
+                <p class="location">${property.location}</p>
+                <button class="add-to-cart" data-id="${property.id}">Add to Cart</button>
+            `;
+        }
+
+        function showModal(property) {
+            generateModal(property);
+            modal.style.display = 'block';
+        }
+
+        function hideModal() {
+            modal.style.display = 'none';
+        }
+
+        function addToCart(id) {
+            const property = propertiesData.find(p => p.id == id);
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <h2>${property.title}</h2>
+                <p class="price">${property.price}</p>
+                <button class="remove-from-cart" data-id="${property.id}">Remove</button>
+            `;
+            const cartContainer = document.querySelector('.cart-container');
+            cartContainer.appendChild(cartItem);
+            updateCartCount();
+        }
+
+        function removeFromCart(id) {
+            const cartItems = document.querySelectorAll('.cart-item');
+            cartItems.forEach(item => {
+                if (item.dataset.id == id) {
+                    item.remove();
+                    updateCartCount();
+                }
+            });
+        }
+
+        function updateCartCount() {
+            const cartItems = document.querySelectorAll('.cart-item');
+            cartCount.textContent = cartItems.length;
+        }
+
+        function setupEventListeners() {
+            propertiesContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('property')) {
+                    const id = e.target.dataset.id;
+                    const property = propertiesData.find(p => p.id == id);
+                    showModal(property);
+                }
+            });
+
+            modal.addEventListener('click', e => {
+                if (e.target == modal || e.target.classList.contains('close')) {
+                    hideModal();
+                }
+            });
+
+            modalContent.addEventListener('click', e => {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const id = e.target.dataset.id;
+                    addToCart(id);
+                    hideModal();
+                }
+            });
+
+            document.addEventListener('click', e => {
+                if (e.target.classList.contains('remove-from-cart')) {
+                    const id = e.target.dataset.id;
+                    removeFromCart(id);
+                }
+            });
+        }
+
+        function setupPagination() {
+            const pages = Math.ceil(propertiesData.length / propertiesPerPage);
+            let html = '';
+            for (let i = 1; i <= pages; i++) {
+                html += `<button class="page-btn" data-page="${i}">${i}</button>`;
+            }
+            const paginationContainer = document.querySelector('.pagination');
+            paginationContainer.innerHTML = html;
+
+            const pageBtns = document.querySelectorAll('.page-btn');
+            pageBtns.forEach(btn => {
+                btn.addEventListener('click', e => {
+                    currentPage = parseInt(e.target.dataset.page);
+                    generateProperties(propertiesData, currentPage);
+                });
+            });
+        }
+
+        function init() {
+            generateProperties(propertiesData, currentPage);
+            setupEventListeners();
+            setupPagination();
+        }
+
+        init();
+    </script>
+</body>
+</html>
