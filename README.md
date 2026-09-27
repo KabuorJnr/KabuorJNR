@@ -52,7 +52,7 @@ I build software for the places where trust breaks down: **public tenders, savin
 **Offline-first school management.** Separate portals for the principal, registrar, finance, teachers, students and parents. Covers attendance, CBC-aligned grading with PDF report cards, fees, discipline and SMS notices. It's a PWA with IndexedDB caching and background sync, running on Supabase with strict Row Level Security. Ships as an Android app.
 
 <sub>React · Vite · Supabase · PostgreSQL RLS · Capacitor</sub><br>
-<a href="https://github.com/KabuorJnr/EduOneApp">Repository ↗</a>
+<a href="https://edu1app.tech">Website ↗</a>
 
 </td>
 <td width="50%" valign="top">
