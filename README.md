@@ -17,14 +17,27 @@
 I build software for the places where trust breaks down: **public tenders, savings groups, school records and climate payouts.** Most of what I ship shares the same DNA: an append-only, hash-chained audit trail, M-Pesa as the payment rail, offline-first clients for patchy networks, and a human in the loop wherever money moves.
 
 - 🏛️ **CEO, [GovTech Builders KE](https://govtechbuilders.me)**: civic and procurement technology for Kenya
+- 📊 **Microsoft Certified: Fabric Data Engineer Associate (DP-700)** ([Verify Credential ↗](https://learn.microsoft.com/users/me/credentials) · ID `54D84D9DA7A2F082`)
 - 🚀 **Founder, [VeriBid](https://veribid.app)**: B2B e-procurement with sealed bids and a verifiable audit chain
-- 🔭 **Now:** shipping DigiShule (EduOne) to schools and getting BlueProof ready for a field pilot
+- 🔭 **Now:** building enterprise Fabric Lakehouses for D365 ERP, shipping DigiShule (EduOne) and testing BlueProof
+
 
 <br>
 
 ## ◆ Featured work
 
 <table>
+<tr>
+<td colspan="2" width="100%" valign="top">
+
+### ⚡ Microsoft Fabric Medallion Lakehouse for Dynamics 365 ERP &nbsp;<sub>`Data Engineering` · `Production`</sub>
+**Enterprise Lakehouse for ERP reporting.** Connects Dynamics 365 / Dataverse to Microsoft Fabric OneLake with zero-copy shortcuts. Ingests raw Delta tables into Bronze, uses PySpark to decode cryptic option sets, standardizes EAT timezones and currencies into Silver, and curates a Gold dimensional star schema (`FactSales`, `FactGeneralLedger`, `DimCustomer`, `DimDate`) with Delta Z-Ordering. Powers executive Power BI reporting in **Direct Lake Mode** with sub-second queries and zero refresh timeouts.
+
+<sub>Microsoft Fabric · OneLake · PySpark · Delta Lake · Power BI Direct Lake · KQL Eventhouse</sub><br>
+<a href="https://github.com/KabuorJnr/fabric-d365-medallion-lakehouse">Repository ↗</a>
+
+</td>
+</tr>
 <tr>
 <td width="50%" valign="top">
 
@@ -187,8 +200,12 @@ I build software for the places where trust breaks down: **public tenders, savin
   <img alt="Redis" src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white">
   <img alt="Firebase" src="https://img.shields.io/badge/Firebase-1C1C1C?style=flat-square&logo=firebase&logoColor=FFCA28">
   <br>
-  <img alt="M-Pesa Daraja" src="https://img.shields.io/badge/M--Pesa_Daraja-00A650?style=flat-square&logoColor=white">
   <img alt="Power BI" src="https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black">
+  <img alt="Microsoft Fabric" src="https://img.shields.io/badge/Microsoft_Fabric-008080?style=flat-square&logo=microsoft&logoColor=white">
+  <img alt="Apache Spark" src="https://img.shields.io/badge/Apache_Spark-E25A1C?style=flat-square&logo=apachespark&logoColor=white">
+  <img alt="Delta Lake" src="https://img.shields.io/badge/Delta_Lake-00ADD8?style=flat-square&logoColor=white">
+  <img alt="Microsoft Azure" src="https://img.shields.io/badge/Microsoft_Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white">
+  <img alt="M-Pesa Daraja" src="https://img.shields.io/badge/M--Pesa_Daraja-00A650?style=flat-square&logoColor=white">
   <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white">
   <img alt="Vercel" src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white">
   <img alt="Render" src="https://img.shields.io/badge/Render-000000?style=flat-square&logo=render&logoColor=white">
